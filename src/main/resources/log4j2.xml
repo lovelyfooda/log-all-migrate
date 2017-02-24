@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="off" monitorInterval="1800">
+	<Properties>
+		<Property name="filePathPrefix">/data/logs/log-all-migrate</Property>
+		<property name="appName">log-all-migrate</property><!-- <Property name="filePathPrefix">/data/logs/${appName}-log</Property> -->
+		<!-- mail server configuration -->
+		<!-- <property name="receipients">chenjun@ecqun.com,wujie@ecqun.com,yeqiang@ecqun.com,longqp@ecqun.com -->
+		<!-- </property> -->
+		<!-- <property name="from">java2015@ecqun.com(ERROR_LOG)</property> -->
+		<!-- <property name="smtpHost">smtp.exmail.qq.com</property> -->
+		<!-- <property name="smtpPort">25</property> -->
+		<!-- <property name="smtpProtocol">smtp</property> -->
+		<!-- <property name="smtpUser">java2015@ecqun.com</property> -->
+		<!-- <property name="smtpPassword">Workec@201505</property> -->
+	</Properties>
+	<Appenders>
+		<Console name="CONSOLE" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="%d - %X - %c -%-4r [%t] %-5p  %x - %m%n" />
+		</Console>
+
+		<!-- appender to send mails (default: error and fatal events) -->
+		<!-- <SMTP name="Mailer" suppressExceptions="false" subject="[${appName}]-ERROR" -->
+		<!-- to="${receipients}" from="${from}" smtpHost="${smtpHost}" smtpPort="${smtpPort}" -->
+		<!-- smtpProtocol="${smtpProtocol}" smtpUsername="${smtpUser}" -->
+		<!-- smtpPassword="${smtpPassword}" smtpDebug="false" bufferSize="30"> -->
+		<!-- by default max 1 emails per 5min -->
+		<!-- <SMTPFilter level="ERROR" maxNotify="1" resetStatusPerSec="300" /> -->
+		<!-- </SMTP> -->
+		<!-- appender to send mails asynchronously -->
+		<!-- <Async name="AsyncMailer"> -->
+		<!-- <appender-ref ref="Mailer" /> -->
+		<!-- </Async> -->
+
+		<!-- Async Loggers will auto-flush in batches, so switch off immediateFlush. -->
+		<!-- bufferSize int The buffer size, defaults to 262,144 bytes (256 * 1024). -->
+
+		<RollingRandomAccessFile name="monitoringLogApp"
+			fileName="${filePathPrefix}/monitoring-log.log" immediateFlush="false"
+			append="true"
+			filePattern="${filePathPrefix}/$${date:yyyy-MM}/monitoring-log/monitoring-log-%d{yyyy-MM-dd}-%i.log">
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="100MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="50" />
+			<PatternLayout>
+				<Pattern>[log-all-migrate] %d - %X - %c -%-4r [%t] %-5p %x - %m%n
+				</Pattern>
+			</PatternLayout>
+		</RollingRandomAccessFile>
+		
+		<RollingRandomAccessFile name="DataConversionLogApp"
+			fileName="${filePathPrefix}/all-migrate-log.log" immediateFlush="false"
+			append="true"
+			filePattern="${filePathPrefix}/$${date:yyyy-MM}/all-migrate-log/all-migrate-log-%d{yyyy-MM-dd}-%i.log">
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="100MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="50" />
+			<PatternLayout>
+				<Pattern>[log-all-migrate] %d - %X - %c -%-4r [%t] %-5p %x - %m%n
+				</Pattern>
+			</PatternLayout>
+		</RollingRandomAccessFile>
+		
+		<RollingRandomAccessFile name="DataConversionMainLogApp"
+			fileName="${filePathPrefix}/all-main-log.log" immediateFlush="false"
+			append="true"
+			filePattern="${filePathPrefix}/$${date:yyyy-MM}/all-main-log/all-main-log-%d{yyyy-MM-dd}-%i.log">
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="100MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="50" />
+			<PatternLayout>
+				<Pattern>[log-all-migrate] %d - %X - %c -%-4r [%t] %-5p %x - %m%n
+				</Pattern>
+			</PatternLayout>
+		</RollingRandomAccessFile>
+		
+		<RollingRandomAccessFile name="DataConversionShard1LogApp"
+			fileName="${filePathPrefix}/all-shard1-log.log" immediateFlush="false"
+			append="true"
+			filePattern="${filePathPrefix}/$${date:yyyy-MM}/all-shard1-log/all-shard1-log-%d{yyyy-MM-dd}-%i.log">
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="100MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="50" />
+			<PatternLayout>
+				<Pattern>[log-all-migrate] %d - %X - %c -%-4r [%t] %-5p %x - %m%n
+				</Pattern>
+			</PatternLayout>
+		</RollingRandomAccessFile>
+		
+		<RollingRandomAccessFile name="DataConversionShard2LogApp"
+			fileName="${filePathPrefix}/all-shard2-log.log" immediateFlush="false"
+			append="true"
+			filePattern="${filePathPrefix}/$${date:yyyy-MM}/all-shard2-log/all-shard2-log-%d{yyyy-MM-dd}-%i.log">
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="100MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="50" />
+			<PatternLayout>
+				<Pattern>[log-all-migrate] %d - %X - %c -%-4r [%t] %-5p %x - %m%n
+				</Pattern>
+			</PatternLayout>
+		</RollingRandomAccessFile>
+		
+		<RollingRandomAccessFile name="SqlOut"
+			fileName="${filePathPrefix}/sql-log.log" immediateFlush="false"
+			append="true"
+			filePattern="${filePathPrefix}/$${date:yyyy-MM}/sql-log/sql-log-%d{yyyy-MM-dd}-%i.log">
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="100MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="50" />
+			<PatternLayout>
+				<Pattern>%m%n
+				</Pattern>
+			</PatternLayout>
+		</RollingRandomAccessFile>
+
+	</Appenders>
+	<Loggers>
+		<logger name="org.springframework" level="DEBUG"></logger>
+		<logger name="com.atomikos.icatch" level="DEBUG"></logger>
+		<logger name="org.eclipse.jetty" level="DEBUG"></logger>
+		<logger name="java.sql.Connection" level="DEBUG"></logger>
+		<logger name="java.sql.Statement" level="DEBUG"></logger>
+		<logger name="java.sql.ResultSet" level="DEBUG"></logger>
+		<logger name="java.sql.PreparedStatement" level="DEBUG"></logger>
+		<logger name="org.mybatis.spring" level="DEBUG"></logger>
+		<logger name="com.trendrr.nsq" level="DEBUG"></logger>
+
+		<Root level="DEBUG">
+			<AppenderRef ref="CONSOLE" />
+			<!-- <AppenderRef ref="DataConversionLogApp" /> -->
+		</Root>
+
+		<AsyncLogger name="monitoringLog"  level="INFO"
+			includeLocation="false" additivity="true">
+			<AppenderRef ref="monitoringLogApp" />
+		</AsyncLogger>
+
+		<AsyncLogger name="dataConversionMainLog"  level="INFO"
+			includeLocation="false" additivity="true">
+			<AppenderRef ref="DataConversionMainLogApp" />
+		</AsyncLogger>
+		
+		<AsyncLogger name="dataConversionShard1Log"  level="INFO"
+			includeLocation="false" additivity="true">
+			<AppenderRef ref="DataConversionShard1LogApp" />
+		</AsyncLogger>
+		
+		<AsyncLogger name="dataConversionShard2Log"  level="INFO"
+			includeLocation="false" additivity="true">
+			<AppenderRef ref="DataConversionShard2LogApp" />
+		</AsyncLogger>
+		<AsyncLogger name="sqloutLog"  level="INFO"
+			includeLocation="false" additivity="true">
+			<AppenderRef ref="SqlOut" />
+		</AsyncLogger>
+	</Loggers>
+</Configuration>

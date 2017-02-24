@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:component-scan base-package="com.ec.log.all" />
+	<context:component-scan base-package="com.ec.commons.server.jetty*" />
+
+	<bean id="xDiamondConfig"
+		class="io.github.xdiamond.client.spring.XDiamondConfigFactoryBean">
+		<property name="serverHost" value="${xdiamond.server.host:10.0.200.53}" />
+		<property name="serverPort" value="5678" />
+		<property name="groupId" value="com.ec" />
+		<property name="artifactId" value="${project.artifactId:log-all-migrate}" />
+		<property name="version" value="${project.version:0.0.1}" />
+		<property name="profile" value="${project.profile:dev}" />
+		<property name="locations">
+			<list>
+				<value>classpath:property-placeholder.properties</value>
+				<value>file:/ec/apps/log-all-migrate/config/property-placeholder.properties
+				</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="locations">
+			<list>
+				<value>classpath:application.properties</value>
+				<value>file:/ec/apps/log-all-migrate/config/application.properties
+				</value>
+			</list>
+		</property>
+		<property name="properties">
+			<bean id="xDiamondProperties" class="java.util.Properties"
+				factory-bean="xDiamondConfig" factory-method="getProperties">
+			</bean>
+		</property>
+	</bean>
+
+	<import resource="spring-jdbc.xml" />
+
+</beans>

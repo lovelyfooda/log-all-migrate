@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE configuration  
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- 允许NULL值 -->
+	<settings>
+		<setting name="callSettersOnNulls" value="true" />
+	</settings>
+
+	<!-- 给bean取别名用在mapping文件中 -->
+	<typeAliases>
+		<typeAlias type="com.ec.log.all.bean.ParamBean" alias="paramBean" />
+	</typeAliases>
+
+	<!-- 这里可以写多个实体的映射文件 -->
+	<mappers>
+		<mapper resource="mybatis/AddLabelMapper.xml" />
+		<mapper resource="mybatis/ContactMapper.xml" />
+	</mappers>
+</configuration>

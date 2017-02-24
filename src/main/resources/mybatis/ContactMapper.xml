@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace用于java代码调用时识别指定xml的mapper文件 -->
+<mapper namespace="com.ec.data.dao.impl.ContactAtDaoImpl">
+
+	<update id="updateContact" parameterType="map">
+		UPDATE d_ec_all_statistics.t_user_report
+			SET f_connect_num = #{f_connect_num}
+			AND f_new_client_num = #{f_new_client_num}
+			AND f_connect_day_num = #{f_connect_day_num}
+			AND f_first_connect_time = #{f_first_connect_time}
+		WHERE f_userid = #{f_userid}
+	</update>
+	<insert id="insertContact" parameterType="map">
+		INSERT INTO 
+		d_ec_all_statistics.t_user_report(f_userid, f_new_client_num, f_connect_day_time, f_connect_count_num)
+		VALUES(#{f_userid}, #{f_new_client_num}, #{f_connect_day_time}, #{f_connect_count_num})
+		ON DUPLICATE KEY 
+			UPDATE f_new_client_num = #{f_new_client_num},
+			f_connect_day_time = #{f_connect_day_time},
+			f_connect_count_num = #{f_connect_count_num}
+	</insert>
+</mapper>

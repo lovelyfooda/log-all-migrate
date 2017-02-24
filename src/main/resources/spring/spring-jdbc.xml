@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd"
+	default-autowire="byName" default-lazy-init="false">
+
+
+	<bean id="sqlSessionBase" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactoryBase" />
+	</bean>
+	<bean id="sqlSessionCrm0" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactoryCrm0" />
+	</bean>
+	<bean id="sqlSessionCrm1" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactoryCrm1" />
+	</bean>
+	<bean id="sqlSessionCrm2" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactoryCrm2" />
+	</bean>
+	<bean id="sqlSessionCrm3" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactoryCrm3" />
+	</bean>
+	<bean id="sqlSessionStatic" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactoryStatic" />
+	</bean>
+
+	<bean id="sqlSessionFactoryBase" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:mybatis/SqlMapConfig.xml"></property>
+		<property name="dataSource" ref="baseDataSource" />
+	</bean>
+
+	<bean id="sqlSessionFactoryCrm0" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:mybatis/SqlMapConfig.xml"></property>
+		<property name="dataSource" ref="crm0DataSource" />
+	</bean>
+	<bean id="sqlSessionFactoryCrm1" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:mybatis/SqlMapConfig.xml"></property>
+		<property name="dataSource" ref="crm1DataSource" />
+	</bean>
+	<bean id="sqlSessionFactoryCrm2" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:mybatis/SqlMapConfig.xml"></property>
+		<property name="dataSource" ref="crm2DataSource" />
+	</bean>
+	<bean id="sqlSessionFactoryCrm3" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:mybatis/SqlMapConfig.xml"></property>
+		<property name="dataSource" ref="crm3DataSource" />
+	</bean>
+	<bean id="sqlSessionFactoryStatic" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:mybatis/SqlMapConfig.xml"></property>
+		<property name="dataSource" ref="staticDataSource" />
+	</bean>
+	
+	
+	<bean id="staticDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${static.jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="initialSize" value="${jdbc.initialSize}" />
+		<property name="maxActive" value="${jdbc.maxActive}" />
+		<property name="minIdle" value="${jdbc.minIdle}" />
+		<property name="maxIdle" value="${jdbc.maxIdle}" />
+		<property name="maxWait" value="${jdbc.maxWaitMillis}" />
+		<property name="logAbandoned" value="${jdbc.logAbandoned}" />
+		<property name="removeAbandoned" value="${jdbc.removeAbandoned}" />
+		<property name="removeAbandonedTimeout" value="${jdbc.removeAbandonedTimeout}" />
+		<property name="testOnBorrow" value="${jdbc.testOnBorrow}" />
+		<property name="testWhileIdle" value="${jdbc.testWhileIdle}" />
+		<property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}" />
+		<property name="numTestsPerEvictionRun" value="${jdbc.numTestsPerEvictionRun}" />
+		<property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}" />
+		<property name="validationQuery" value="${jdbc.validationQuery}" />
+		<property name="defaultAutoCommit" value="${jdbc.defaultAutoCommit}" />
+	</bean>
+	<bean id="crm0DataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${crm0.jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="initialSize" value="${jdbc.initialSize}" />
+		<property name="maxActive" value="${jdbc.maxActive}" />
+		<property name="minIdle" value="${jdbc.minIdle}" />
+		<property name="maxIdle" value="${jdbc.maxIdle}" />
+		<property name="maxWait" value="${jdbc.maxWaitMillis}" />
+		<property name="logAbandoned" value="${jdbc.logAbandoned}" />
+		<property name="removeAbandoned" value="${jdbc.removeAbandoned}" />
+		<property name="removeAbandonedTimeout" value="${jdbc.removeAbandonedTimeout}" />
+		<property name="testOnBorrow" value="${jdbc.testOnBorrow}" />
+		<property name="testWhileIdle" value="${jdbc.testWhileIdle}" />
+		<property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}" />
+		<property name="numTestsPerEvictionRun" value="${jdbc.numTestsPerEvictionRun}" />
+		<property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}" />
+		<property name="validationQuery" value="${jdbc.validationQuery}" />
+		<property name="defaultAutoCommit" value="${jdbc.defaultAutoCommit}" />
+	</bean>
+	<bean id="crm1DataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${crm1.jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="initialSize" value="${jdbc.initialSize}" />
+		<property name="maxActive" value="${jdbc.maxActive}" />
+		<property name="minIdle" value="${jdbc.minIdle}" />
+		<property name="maxIdle" value="${jdbc.maxIdle}" />
+		<property name="maxWait" value="${jdbc.maxWaitMillis}" />
+		<property name="logAbandoned" value="${jdbc.logAbandoned}" />
+		<property name="removeAbandoned" value="${jdbc.removeAbandoned}" />
+		<property name="removeAbandonedTimeout" value="${jdbc.removeAbandonedTimeout}" />
+		<property name="testOnBorrow" value="${jdbc.testOnBorrow}" />
+		<property name="testWhileIdle" value="${jdbc.testWhileIdle}" />
+		<property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}" />
+		<property name="numTestsPerEvictionRun" value="${jdbc.numTestsPerEvictionRun}" />
+		<property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}" />
+		<property name="validationQuery" value="${jdbc.validationQuery}" />
+		<property name="defaultAutoCommit" value="${jdbc.defaultAutoCommit}" />
+	</bean>
+	<bean id="crm2DataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${crm2.jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="initialSize" value="${jdbc.initialSize}" />
+		<property name="maxActive" value="${jdbc.maxActive}" />
+		<property name="minIdle" value="${jdbc.minIdle}" />
+		<property name="maxIdle" value="${jdbc.maxIdle}" />
+		<property name="maxWait" value="${jdbc.maxWaitMillis}" />
+		<property name="logAbandoned" value="${jdbc.logAbandoned}" />
+		<property name="removeAbandoned" value="${jdbc.removeAbandoned}" />
+		<property name="removeAbandonedTimeout" value="${jdbc.removeAbandonedTimeout}" />
+		<property name="testOnBorrow" value="${jdbc.testOnBorrow}" />
+		<property name="testWhileIdle" value="${jdbc.testWhileIdle}" />
+		<property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}" />
+		<property name="numTestsPerEvictionRun" value="${jdbc.numTestsPerEvictionRun}" />
+		<property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}" />
+		<property name="validationQuery" value="${jdbc.validationQuery}" />
+		<property name="defaultAutoCommit" value="${jdbc.defaultAutoCommit}" />
+	</bean>
+	<bean id="crm3DataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${crm3.jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="initialSize" value="${jdbc.initialSize}" />
+		<property name="maxActive" value="${jdbc.maxActive}" />
+		<property name="minIdle" value="${jdbc.minIdle}" />
+		<property name="maxIdle" value="${jdbc.maxIdle}" />
+		<property name="maxWait" value="${jdbc.maxWaitMillis}" />
+		<property name="logAbandoned" value="${jdbc.logAbandoned}" />
+		<property name="removeAbandoned" value="${jdbc.removeAbandoned}" />
+		<property name="removeAbandonedTimeout" value="${jdbc.removeAbandonedTimeout}" />
+		<property name="testOnBorrow" value="${jdbc.testOnBorrow}" />
+		<property name="testWhileIdle" value="${jdbc.testWhileIdle}" />
+		<property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}" />
+		<property name="numTestsPerEvictionRun" value="${jdbc.numTestsPerEvictionRun}" />
+		<property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}" />
+		<property name="validationQuery" value="${jdbc.validationQuery}" />
+		<property name="defaultAutoCommit" value="${jdbc.defaultAutoCommit}" />
+	</bean>
+
+	<bean id="baseDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${base.jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="initialSize" value="${jdbc.initialSize}" />
+		<property name="maxActive" value="${jdbc.maxActive}" />
+		<property name="minIdle" value="${jdbc.minIdle}" />
+		<property name="maxIdle" value="${jdbc.maxIdle}" />
+		<property name="maxWait" value="${jdbc.maxWaitMillis}" />
+		<property name="logAbandoned" value="${jdbc.logAbandoned}" />
+		<property name="removeAbandoned" value="${jdbc.removeAbandoned}" />
+		<property name="removeAbandonedTimeout" value="${jdbc.removeAbandonedTimeout}" />
+		<property name="testOnBorrow" value="${jdbc.testOnBorrow}" />
+		<property name="testWhileIdle" value="${jdbc.testWhileIdle}" />
+		<property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}" />
+		<property name="numTestsPerEvictionRun" value="${jdbc.numTestsPerEvictionRun}" />
+		<property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}" />
+		<property name="validationQuery" value="${jdbc.validationQuery}" />
+		<property name="defaultAutoCommit" value="${jdbc.defaultAutoCommit}" />
+	</bean>
+
+</beans>

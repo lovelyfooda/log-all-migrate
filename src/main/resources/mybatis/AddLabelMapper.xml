@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace用于java代码调用时识别指定xml的mapper文件 -->
+<mapper namespace="com.ec.data.dao.impl.StatisticalDaoImpl">
+
+	<select id="getTables" parameterType="paramBean" resultType="string">
+		SELECT
+			TABLE_NAME
+		FROM
+			INFORMATION_SCHEMA.TABLES
+		WHERE
+			TABLE_SCHEMA = '${dbName}'
+		ORDER BY
+			TABLE_NAME DESC
+	</select>
+
+	<select id="getColumns" parameterType="paramBean" resultType="map">
+		SELECT
+			COLUMN_NAME,DATA_TYPE
+		FROM
+			Information_schema.COLUMNS
+		WHERE
+			table_Name = '${tableName}'
+	</select>
+	
+	<select id="getCount" parameterType="paramBean" resultType="int">
+		SELECT COUNT(*) FROM ${dbName}.${tableName}
+	</select>
+	
+	<select id="getList" parameterType="paramBean" resultType="map">
+		SELECT
+			*
+		FROM
+			${dbName}.${tableName}
+		WHERE
+			${column} > '${pageValue}'
+		ORDER BY
+			${column} ASC
+		LIMIT ${limitNum}
+	</select>
+	
+	<update id="updateStatus" parameterType="map">
+		UPDATE d_ec_sys.t_ec_log_migrt_status
+		SET f_status = #{status}  
+		WHERE
+			f_id = #{id}
+	</update>
+	
+</mapper>
